@@ -42,6 +42,21 @@ jobs:
           fi
           echo "Build verification successful"
 
+      - name: Verify built HTML has correct asset paths
+        run: |
+          if grep -q '/src/main.js' dist/index.html; then
+            echo "Error: dist/index.html still contains source file reference (/src/main.js)"
+            echo "This indicates the build did not complete correctly"
+            exit 1
+          fi
+          if ! grep -q '/garick-harlamov-fanpage/assets/' dist/index.html; then
+            echo "Warning: dist/index.html does not contain expected asset paths"
+            echo "Contents of dist/index.html:"
+            cat dist/index.html
+          else
+            echo "✓ Built HTML contains correct asset paths"
+          fi
+
       - name: List build output
         run: |
           echo "Build output contents:"
