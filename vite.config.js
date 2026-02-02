@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
   ],
+  base: '/garick-harlamov-fanpage/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
