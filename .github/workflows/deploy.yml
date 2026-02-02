@@ -50,6 +50,9 @@ jobs:
           echo "dist/assets contents:"
           ls -la dist/assets/ || echo "No assets folder"
 
+      - name: Disable Jekyll processing
+        run: touch dist/.nojekyll
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
